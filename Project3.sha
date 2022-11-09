@@ -1,0 +1,371 @@
+Make(delphi)
+ver(4.04 build 185)
+Add(MainForm,2953706,21,105)
+{
+ Width=578
+ Caption="Plati.ru Email Graber v1.3"
+ Position=1
+}
+Add(Convertor,10736984,378,291)
+{
+ Mode=11
+ link(onResult,2638024:doEvent1,[(482,297)(482,321)])
+}
+Add(HTTP_Get,10795978,308,284)
+{
+ link(onDownload,10736984:doConvert,[])
+ link(onStop,7041588:doWork1,[(348,311)(348,538)])
+ link(URL,8883725:Var2,[])
+}
+Add(MultiElement,7041588,357,532)
+{
+ link(onEvent1,4056993:doEvent1,[])
+ link(Data1,8883725:Var3,[(363,243)])
+}
+BEGIN_SDK
+  Add(EditMulti,6112662,21,21)
+  {
+   EventCount=1
+   WorkCount=1
+   DataCount=1
+   Width=811
+   Height=585
+   link(doWork1,13226717:doSplit,[(119,27)(119,188)])
+  }
+  Add(MultiStrData,13226717,91,182)
+  {
+   Char="="
+   From=1
+   Count=1
+   link(Str,8369003:Var2,[])
+   link(onPart1,8249264:doOperation,[(142,188)(142,90)])
+  }
+  Add(Math,8249264,161,84)
+  {
+   OpType=1
+   Op2=1
+   ResultType=0
+   link(onResult,6022458:doCase,[])
+  }
+  Add(Case,6022458,224,84)
+  {
+   Value=Integer(0)
+   link(onNextCase,2315407:doData,[])
+  }
+  Add(DoData,2315407,301,84)
+  {
+   link(onEventData,12844482:doWork2,[])
+   link(Data,8369003:Var3,[(307,61)])
+  }
+  Add(GetDataEx,8369003,91,56)
+  {
+   link(Data,6112662:Data1,[(97,52)(27,52)])
+  }
+  Add(Memory,2382014,385,84)
+  {
+   link(onData,6003314:doCopy,[])
+  }
+  Add(Copy,6003314,434,84)
+  {
+   Position=1
+   Count=1
+   Direction=1
+   link(onCopy,11949657:doCase,[])
+  }
+  Add(Case,11949657,483,84)
+  {
+   Value=String(=)
+   link(onNextCase,11806171:doLength,[])
+   link(onTrue,7175781:doStrCat,[(524,97)(524,209)])
+  }
+  Add(Delete,8114894,735,84)
+  {
+   Position=0
+   Count=1
+   link(onDelete,12844482:doWork1,[(786,90)(786,167)(347,167)])
+   link(Str,11750642:Var3,[(741,61)])
+   link(Position,11806171:Result,[(748,72)(716,72)(716,128)(685,128)])
+  }
+  Add(Length,11806171,679,84)
+  {
+   link(onLength,8114894:doDelete,[])
+   link(Str,11750642:Var2,[])
+  }
+  Add(GetDataEx,11750642,679,56)
+  {
+   link(Data,13895559:Var,[])
+  }
+  Add(LineBreak,2897764,385,126)
+  {
+   Type=1
+   link(Data,2382014:Value,[])
+   Primary=[13895559,294,-98]
+  }
+  Add(HubEx,12844482,343,84)
+  {
+   link(onEvent,2382014:doValue,[])
+  }
+  Add(StrCat,7175781,567,203)
+  {
+   link(onStrCat,6112662:onEvent1,[(798,209)(798,27)])
+   link(Str1,11750642:Var1,[(573,61)])
+   link(Str2,8249264:Result,[(580,182)(167,182)])
+  }
+END_SDK
+Add(GetDataEx,8883725,308,238)
+{
+ link(Data,4283659:Text,[(314,205)(344,205)])
+}
+Add(Label,9550414,390,189)
+{
+ Left=5
+ Top=10
+ Width=159
+ Height=21
+ Color=0
+ Font=[Blood Cyrillic,13,1,16777215,0]
+ Hint=" URL"
+ Caption=".URL           "
+}
+Add(Edit,4283659,338,140)
+{
+ Left=55
+ Top=10
+ Width=511
+ Height=21
+ Color=12632256
+ Text="http://www.exaccess.ru/asp/seller.asp?id_s=75400"
+}
+Add(Counter,11183713,427,448)
+{
+ Max=1
+}
+Add(If_else,8633489,476,546)
+{
+ Op2=Integer(0)
+ link(onTrue,13851130:doWork3,[(520,552)(520,420)(193,420)])
+ link(Op1,11183713:Count,[(482,499)(433,499)])
+}
+Add(Button,12318053,106,280)
+{
+ Left=4
+ Top=225
+ Width=157
+ Height=30
+ Caption="Грабить"
+ link(onClick,13851130:doWork2,[])
+}
+Add(Button,14177913,246,462)
+{
+ Left=165
+ Top=225
+ Width=136
+ Height=30
+ Caption="Стоп"
+ link(onClick,9943214:doEvent1,[])
+}
+Add(Hub,9943214,378,462)
+{
+ link(onEvent1,11183713:doNext,[(410,468)(410,454)])
+}
+Add(Hub,4056993,399,532)
+{
+ link(onEvent1,4283659:doText,[(425,538)(425,343)(295,343)(295,146)])
+ link(onEvent2,8633489:doCompare,[(445,545)(445,552)])
+}
+Add(HubEx,13851130,189,280)
+{
+ link(onEvent,10795978:doDownload,[(247,286)(247,290)])
+}
+Add(Edit,6652507,1015,308)
+{
+ Left=55
+ Top=85
+ Width=285
+ Text=""
+ link(Str,84145:Var3,[(1021,296)])
+}
+Add(Edit,6230637,1197,427)
+{
+ Left=55
+ Top=125
+ Width=285
+ Text=""
+ link(onChange,1997661:doString,[(1241,433)(1241,580)(1136,580)(1136,727)])
+ link(Str,4057802:Var3,[(1203,415)])
+}
+Add(Edit,3821350,728,301)
+{
+ Left=55
+ Top=105
+ Width=285
+ Text=""
+}
+Add(Hub,15425183,665,378)
+{
+ link(onEvent1,13568303:doValue,[(767,384)(767,356)])
+ link(onEvent2,15415729:doSearch,[(721,391)(721,412)])
+}
+Add(BlockFind,12163956,609,378)
+{
+ IncludeBlock=1
+ StartBlock="mailto:"
+ EndBlock="">"
+ link(onSearch,15425183:doEvent1,[])
+}
+Add(Hub,2638024,553,315)
+{
+ OutCount=3
+ link(onEvent1,7182134:doSearch,[(595,321)(595,286)])
+ link(onEvent2,16513270:doSearch,[(595,328)(595,468)])
+ link(onEvent3,12163956:doSearch,[(588,335)(588,384)])
+}
+Add(Edit,16602525,896,406)
+{
+ Left=55
+ Top=105
+ Width=285
+ Text=""
+ link(onChange,4231250:doEvent1,[(947,412)(947,405)])
+ link(Str,8732896:Var3,[(902,394)])
+}
+Add(Position,15415729,777,406)
+{
+ Target="support@exaccess.ru"
+ ZeroPos=0
+ ShortSearch=1
+ link(onSearch,16036359:doCompare,[])
+ link(Str,8732896:Var2,[(783,398)])
+}
+Add(Memory,13568303,868,350)
+{
+}
+Add(If_else,16036359,833,406)
+{
+ Op2=Integer(0)
+ link(onTrue,16602525:doText,[])
+}
+Add(GetDataEx,8732896,875,389)
+{
+ Angle=3
+ link(Data,13568303:Value,[(874,394)])
+}
+Add(Button,5496269,1040,846)
+{
+ Left=430
+ Top=225
+ Width=137
+ Height=30
+ Caption="Сохранить"
+ link(onClick,2826742:doSave,[(1252,852)(1252,811)])
+}
+Add(StringTable,2826742,1435,777)
+{
+ Left=5
+ Top=35
+ Width=561
+ Height=185
+ FileName="email.txt"
+ Columns=#7:Имя=200|9:Email=170|20:WM-идентификатор=170|
+ Grid=0
+ Redaction=1
+ Point(Matrix)
+}
+Add(FormatStr,1997661,1148,721)
+{
+ DataCount=4
+ Mask="%1;%2;%3"
+ Point(FString)
+ link(onFString,2826742:doAdd,[(1308,727)(1308,783)])
+ link(Str1,6652507:Text,[(1154,467)(1021,467)])
+ link(Str2,6230637:Text,[(1161,527)(1203,527)])
+ link(Str3,11007078:Value,[(1168,607)(769,607)])
+}
+Add(BlockFind,7182134,623,280)
+{
+ IncludeBlock=1
+ StartBlock="nowrap>ФИО:</td>"
+ EndBlock="</tr>"
+ link(onSearch,16178662:doSearch,[(663,286)(663,307)])
+}
+Add(BlockFind,16178662,672,301)
+{
+ IncludeBlock=1
+ StartBlock="&nbsp;"
+ EndBlock="</td>"
+ link(onSearch,14950186:doEvent1,[(744,307)(744,286)])
+}
+Add(Hub,14950186,784,280)
+{
+ link(onEvent1,507701:doValue,[(886,286)(886,258)])
+ link(onEvent2,15090935:doSearch,[(840,293)(840,314)])
+}
+Add(Position,15090935,896,308)
+{
+ Target="<font color=red>нет</font>"
+ ZeroPos=0
+ ShortSearch=1
+ link(onSearch,11687025:doCompare,[])
+ link(Str,84145:Var2,[(902,300)])
+}
+Add(Memory,507701,987,252)
+{
+}
+Add(If_else,11687025,952,308)
+{
+ Op2=Integer(0)
+ link(onTrue,6652507:doText,[])
+}
+Add(GetDataEx,84145,994,291)
+{
+ Angle=3
+ link(Data,507701:Value,[(993,296)])
+}
+Add(Hub,4231250,966,399)
+{
+ link(onEvent1,6509310:doValue,[(1068,405)(1068,377)])
+ link(onEvent2,7076023:doSearch,[(1022,412)(1022,433)])
+}
+Add(Position,7076023,1078,427)
+{
+ Target="<font color=red>нет</font>"
+ ZeroPos=0
+ ShortSearch=1
+ link(onSearch,4172930:doCompare,[])
+ link(Str,4057802:Var2,[(1084,419)])
+}
+Add(Memory,6509310,1169,371)
+{
+}
+Add(If_else,4172930,1134,427)
+{
+ Op2=Integer(0)
+ link(onTrue,6230637:doText,[])
+}
+Add(GetDataEx,4057802,1176,410)
+{
+ Angle=3
+ link(Data,6509310:Value,[(1175,415)])
+}
+Add(Button,4864589,925,819)
+{
+ Left=305
+ Top=225
+ Width=121
+ Height=30
+ Caption="Очистить"
+ link(onClick,2826742:doClear,[(1115,825)(1115,790)])
+}
+Add(StyleXP,15834201,105,112)
+{
+}
+Add(BlockFind,16513270,623,462)
+{
+ IncludeBlock=1
+ StartBlock="href="http://events.webmoney.ru/user.aspx?"
+ EndBlock="">"
+ link(onSearch,11007078:doValue,[])
+}
+Add(Memory,11007078,763,462)
+{
+}
